@@ -19,7 +19,7 @@ authors = [
 ]
 description = "Convenient python data interface for the H2H project."
 readme = "README.md"
-license = {text = "BSD-3-Clause"}
+license = {file = "LICENSE"}
 classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
