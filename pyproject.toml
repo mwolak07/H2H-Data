@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "h2h_data"
+dependencies = [
+    "mat73 == 0.63",
+    "matplotlib == 3.8.4",
+    "numpy == 1.26.4",
+    "scikit-spatial == 7.2.0",
+    "scipy == 1.13.0",
+    "setuptools == 66.0.0",
+    "tqdm == 4.66.2",
+]
+requires-python = ">=3.9"
+authors = [
+    {name = "Mateusz Wolak", email = "mwolak07@gmail.com"},
+]
+description = "Convenient python data interface for the H2H project."
+readme = "README.md"
+license = {text = "BSD-3-Clause"}
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+]
+dynamic = ["version"]
+
+[project.urls]
+Repository = "https://github.com/mwolak07/H2H-Data.git"

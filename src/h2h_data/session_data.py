@@ -11,10 +11,10 @@ import mat73
 # TODO: Replace lists with numpy fixed memory allocation (performance).
 
 
-class H2HSessionData(Sequence):
+class SessionData(Sequence):
     """
     Represents a fast and convenient Python interface for the H2H session data, stored in Matlab 7.3 files.
-    Each H2HSessionData object corresponds to one session, and contains the data gathered for each trial, except
+    Each SessionData object corresponds to one session, and contains the data gathered for each trial, except
     for images and video. (Currently, we only include mocap).
     Handover time is also provided, computed from the velocity profile of the follower wrist marker.
 
@@ -22,7 +22,7 @@ class H2HSessionData(Sequence):
     continue that here - there is no trial 0.
 
     Each element of the sequence looks as follows:
-    H2HSessionData[trial] = {
+    SessionData[trial] = {
         'mocap': {marker: [(timestamp, point)]},
         'role': str,
         'handover': float
@@ -611,10 +611,10 @@ def main() -> None:
 
 def short_test() -> None:
     """
-    Short test for H2HSessionData.
+    Short test for SessionData.
     """
     session_file = 'E:/Datasets/CS 4440 Final Project/mat_files_full/test_data.mat'
-    session_data = H2HSessionData(session_file=session_file, debug=True)
+    session_data = SessionData(session_file=session_file, debug=True)
     session_data.load()
     # session_data.crop_to_handover()  # TODO: This is likely wrong, I do not like the method here.
     session_data.crop_nan()
@@ -631,7 +631,7 @@ def short_test() -> None:
                       'Sub2_RAC', 'Sub2_RHME', 'Sub2_RRSP',
                       'Sub2_LFT', 'Sub2_LFLE', 'Sub2_LLM', 'Sub2_L2MH',
                       'Sub2_RFT', 'Sub2_RFLE', 'Sub2_RLM', 'Sub2_R2MH']
-    session_data = H2HSessionData(session_file=session_file, target_markers=target_markers, debug=True)
+    session_data = SessionData(session_file=session_file, target_markers=target_markers, debug=True)
     session_data.load()
     # session_data.crop_to_handover()  # TODO: This is likely wrong, I do not like the method here.
     session_data.crop_nan()
@@ -643,10 +643,10 @@ def short_test() -> None:
 
 def long_test() -> None:
     """
-    Long test for H2HSessionData.
+    Long test for SessionData.
     """
     session_file = 'E:/Datasets/CS 4440 Final Project/mat_files_full/26_M4_F5_cropped_data_v2.mat'
-    session_data = H2HSessionData(session_file=session_file, debug=True)
+    session_data = SessionData(session_file=session_file, debug=True)
     session_data.load()
     # session_data.crop_to_handover()  # TODO: This is likely wrong, I do not like the method here.
     session_data.crop_nan()
@@ -656,12 +656,12 @@ def long_test() -> None:
     print(f'All markers trials: {session_data.trials()}')
 
 
-def h2h_session_data_isnan(session_data: H2HSessionData) -> bool:
+def h2h_session_data_isnan(session_data: SessionData) -> bool:
     """
-    Checks if the H2HSessionData object contains any NaN values.
+    Checks if the SessionData object contains any NaN values.
 
     Args:
-        session_data: The H2HSessionData object to be checked.
+        session_data: The SessionData object to be checked.
 
     Returns:
         True if there were nans, False if there were not.
