@@ -111,6 +111,7 @@ class SessionData(Sequence):
         sub_2_tag: (class attribute) The preceding "tag" for subject 2's markers (used for handover).
         session_file: The path to the Matlab 7.3 file containing the session's data.
         target_markers: The list of markers to include. (If None, include all).
+        loaded: True if the data has already been loaded.
         session: The id string for the session.
         date: The date the session data was collected on.
         _trials: A list of trials in this session (1, 2, 3, etc.).
@@ -153,6 +154,7 @@ class SessionData(Sequence):
     session_file: str
     target_markers: Set[str]
     handover_method: HandoverMethod
+    loaded: bool
     session: str
     date: str
     _trials: List[int]
@@ -192,6 +194,7 @@ class SessionData(Sequence):
         self.handover_method = HandoverMethod(handover_method)
         self.print_warnings = print_warnings
         self.debug = debug
+        self.loaded = False
         self.session = None
         self.date = None
         # Initialize private attributes.
@@ -378,6 +381,7 @@ class SessionData(Sequence):
         Modifies the public attributes:
             - self.session
             - self.date
+            - self.loaded
         Modifies the private attributes:
             - self._trials
             - self._force_data
@@ -416,6 +420,8 @@ class SessionData(Sequence):
         self._gaze2d_data = self._parse_gaze2d(session_data)
         self._gaze3d_data = self._parse_gaze3d(session_data)
         self._handover_data = self._get_handover()
+        # Mark the data as loaded.
+        self.loaded = True
 
     def _parse_trials(self, session_data: Dict[str, Any]) -> List[int]:
         """
